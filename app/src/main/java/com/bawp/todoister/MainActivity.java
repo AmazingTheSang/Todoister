@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements OnToDoClickListen
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
     BottomSheetFragment bottomSheetFragment;
+    private SharedViewModel sharedViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +52,12 @@ public class MainActivity extends AppCompatActivity implements OnToDoClickListen
         taskViewModel = new ViewModelProvider.AndroidViewModelFactory(
                 MainActivity.this.getApplication())
                 .create(TaskViewModel.class);
+
+        sharedViewModel = new ViewModelProvider(this)
+                .get(SharedViewModel.class);
+
+
+
         taskViewModel.getAllTasks().observe(this, tasks ->{
             recyclerViewAdapter = new RecyclerViewAdapter(tasks,this);
             recyclerView.setAdapter(recyclerViewAdapter);
@@ -61,11 +69,11 @@ public class MainActivity extends AppCompatActivity implements OnToDoClickListen
 //               Task task = new Task("Todo", Priority.HIGH, Calendar.getInstance().getTime(),
 //                       Calendar.getInstance().getTime(),false);
 //               TaskViewModel.insert(task);
-                ShowBottomSheetDialog();
+                showBottomSheetDialog();
             }
         });
     }
-    private void ShowBottomSheetDialog(){
+    private void showBottomSheetDialog(){
         bottomSheetFragment.show(getSupportFragmentManager(),bottomSheetFragment.getTag());
     }
     @Override
@@ -91,7 +99,10 @@ public class MainActivity extends AppCompatActivity implements OnToDoClickListen
     }
 
     @Override
-    public void onTodoClick(int adapterPosition, Task task) {
+    public void onTodoClick(Task task) {
+        sharedViewModel.selectItem(task);
+        sharedViewModel.setIsEdit(true);
+        showBottomSheetDialog();
     }
     @Override
     public void onTodoRadioButtonClick(Task task) {
