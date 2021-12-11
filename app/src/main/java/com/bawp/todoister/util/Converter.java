@@ -6,7 +6,7 @@ import com.bawp.todoister.Model.Priority;
 
 import java.util.Date;
 
-public class Converter {
+public class Converter { // convert kieu Date va Priority thanh String de Room co the luu duoc, dong thoi chuyen String tro lai Date va Prority
     @TypeConverter
     public static Date fromTimestamp(Long value){
         return value == null ? null : new Date(value);
