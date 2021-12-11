@@ -10,7 +10,7 @@ import com.bawp.todoister.util.TaskRoomDatabase;
 
 import java.util.List;
 
-public class DoisterRepository {
+public class DoisterRepository { //tong hop cac nguon du lieu can thiet trong truong hop app co hon 1 nguon du lieu.
     private final TaskDao taskDao;
     private final LiveData<List<Task>> allTasks;
 
