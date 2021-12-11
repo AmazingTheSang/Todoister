@@ -10,7 +10,7 @@ import androidx.lifecycle.LiveData;
 import com.bawp.todoister.Data.DoisterRepository;
 
 import java.util.List;
-public class TaskViewModel extends AndroidViewModel {
+public class TaskViewModel extends AndroidViewModel { //chua du lieu de hien thi len UI, du lieu duoc lay tu reposity.
     public static DoisterRepository repository;
     public final LiveData<List<Task>> allTasks;
     public TaskViewModel(@NonNull Application application) {
